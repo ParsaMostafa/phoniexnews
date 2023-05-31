@@ -48,5 +48,9 @@
             android:name="url"
             app:argType="string"/>
     </fragment>
+    <fragment
+        android:id="@+id/fragmentlogout"
+        android:name="com.example.phoenixnews.fragments.Fragmentlogout"
+        android:label="Fragmentlogout" />
 
 </navigation>

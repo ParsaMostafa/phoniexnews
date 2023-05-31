@@ -13,4 +13,10 @@
         android:id="@+id/searchNewsFragment"
         android:title="SearchNews"
         android:icon="@drawable/adsfsdfgd_vectorized"/>
+    <item
+        android:id="@+id/fragmentlogout"
+        android:title="settings"
+        android:icon="@drawable/baseline_logout_24">
+
+    </item>
 </menu>

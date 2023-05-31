@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.phoenixnews.databinding.ItemPreViewBinding
+
 import com.example.phoenixnews.model.Article
 
 class NewsAdaptor: PagingDataAdapter<Article, NewsAdaptor.ArticleViewHolder>(ARTICLE_COMPARATOR) {
