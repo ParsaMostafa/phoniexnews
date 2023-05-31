@@ -9,7 +9,7 @@ class loginpref {
     private val PRIVATE_MODE = 0
 
 
-    val username ge
+  // val username ge
 
     companion object {
         const val PREF_NAME = "Login_Preference"

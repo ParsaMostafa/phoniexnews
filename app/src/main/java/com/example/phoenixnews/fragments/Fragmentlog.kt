@@ -1,5 +1,7 @@
 package com.example.phoenixnews.fragments
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,24 +35,66 @@ class Fragmentlog : Fragment() {
         val emailTextInput = binding.tilEmail
         val btnLogin = binding.btnLogin
 
+
+        usernameTextInput.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Implement your logic before the text changes for the username field
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Implement your logic when the text changes for the username field
+                usernameTextInput.error = null // Clear any previous error message
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Implement your logic after the text changes for the username field
+            }
+        })
+
+      emailTextInput.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Implement your logic before the text changes for the email field
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Implement your logic when the text changes for the email field
+                emailTextInput.error = null // Clear any previous error message
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Implement your logic after the text changes for the email field
+            }
+        })
+
         btnLogin.setOnClickListener {
             val usernameText = usernameTextInput.editText?.text.toString().trim()
             val emailText = emailTextInput.editText?.text.toString().trim()
 
-            if (usernameText.isEmpty()) {
-                usernameTextInput.error= "username field can not be empty"
-            } else
-                if (emailText.isEmpty()){
-                    emailTextInput.error = "email field can not be empty"
-                } else
+            var errorOccurred = false
 
-                if (!isEmailValid(emailText)) {
-                emailTextInput.error = "Please enter a valid email address"
+            if (usernameText.isEmpty()) {
+                usernameTextInput.error = "Username field cannot be empty"
+                errorOccurred = true
             } else {
+                usernameTextInput.error = null
+            }
+
+            if (emailText.isEmpty()) {
+                emailTextInput.error = "Email field cannot be empty"
+                errorOccurred = true
+            }else if (!isEmailValid(emailText)){
+                   emailTextInput.error = "Please enter a valid email address"
+                errorOccurred = true
+            }
+
+
+
+            if (!errorOccurred) {
                 session.createLoginSession(usernameText, emailText)
                 navigateToNewsActivity()
             }
         }
+
     }
 
     private fun navigateToNewsActivity() {
