@@ -1,7 +1,6 @@
 package com.example.phoenixnews.fragments
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.phoenixnews.App
+import androidx.navigation.fragment.findNavController
 import com.example.phoenixnews.R
 import com.example.phoenixnews.databinding.FragmentlogoutBinding
 import com.example.phoenixnews.fragments.viewmodel.ViewmodelPerf
@@ -58,9 +57,8 @@ class Fragmentlogout : Fragment() {
                 .setPositiveButton("Yes") { _, _ ->
                     session.logoutUser()
                     // Navigate to the login fragment
-                    var i : Intent = Intent(App.appContext,Fragmentlog::class.java)
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(i)
+                    val action = FragmentlogoutDirections.actionFragmentlogoutToLoginActivity()
+                    findNavController().navigate(action)
 
 
                 }

@@ -5,15 +5,15 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.phoenixnews.App
 import com.example.phoenixnews.databinding.FragmentLogBinding
+import com.example.phoenixnews.fragments.viewmodel.ViewmodelPerf
 import com.example.phoenixnews.sharedperefence.loginpref
 
 class Fragmentlog : Fragment() {
-
+    private val viewModel: ViewmodelPerf by viewModels()
     private lateinit var binding: FragmentLogBinding
     private lateinit var session: loginpref
 
@@ -31,9 +31,15 @@ class Fragmentlog : Fragment() {
 
         session = loginpref()
 
+
+
         val usernameTextInput = binding.tilUsername
         val emailTextInput = binding.tilEmail
         val btnLogin = binding.btnLogin
+
+        if(viewModel.isLoggedIn()){
+            navigateToNewsActivity()
+        }
 
 
         usernameTextInput.editText?.addTextChangedListener(object : TextWatcher {

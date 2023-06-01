@@ -1,30 +1,35 @@
 package com.example.phoenixnews.fragments.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.phoenixnews.repository.repository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
+import com.example.phoenixnews.sharedperefence.loginpref
 
 class ViewmodelPerf : ViewModel() {
-    private val repository = repository()
 
-    private val _userDetails: MutableStateFlow<HashMap<String, String>> = MutableStateFlow(HashMap())
-    val userDetails: StateFlow<HashMap<String, String>> = _userDetails
+    private val loginPreference = loginpref()
 
-    fun getUserDetails() = viewModelScope.launch {
-        val details = repository.getUserDetails()
-        _userDetails.emit(details)
+
+
+    fun isLoggedIn(): Boolean {
+        return loginPreference.isLoggedIn
     }
 
-    fun isLoggedIn() = viewModelScope.launch { repository.isLoggedIn() }
+    fun getUsername(): String {
+        return loginPreference.username
+    }
 
-    fun loginUser(username: String, email: String) {
-        repository.loginUser(username, email)
+    fun getEmail(): String {
+        return loginPreference.email
+    }
+
+    fun createLoginSession(username: String, email: String) {
+        loginPreference.createLoginSession(username, email)
+    }
+
+    fun checkLogin() {
+        loginPreference.checkLogin()
     }
 
     fun logoutUser() {
-        repository.logoutUser()
+        loginPreference.logoutUser()
     }
 }

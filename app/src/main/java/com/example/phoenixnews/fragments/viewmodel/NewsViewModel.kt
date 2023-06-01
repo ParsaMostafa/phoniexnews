@@ -9,14 +9,15 @@ import com.example.phoenixnews.api.RetrofitInstance
 import com.example.phoenixnews.model.Article
 import com.example.phoenixnews.paging.NewsPagingSource
 import com.example.phoenixnews.paging.SearchNewsPagingSource
-import com.example.phoenixnews.repository.repository
+import com.example.phoenixnews.repository.Repository
+
 import com.example.phoenixnews.utility.Contance.Companion.PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class NewsViewModel : ViewModel() {
     private val newsApi = RetrofitInstance.api
-    private val repository = repository()
+    private val repository = Repository()
     var article: Article? = null
 
 
