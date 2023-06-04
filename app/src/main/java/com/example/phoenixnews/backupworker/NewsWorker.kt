@@ -33,12 +33,12 @@ class NewsWorker(context: Context, workerParameters: WorkerParameters) : Corouti
 
         // Display the notification
         showNotification(notification)
-        val breakingNewsFlow: Flow<PagingData<Article>> = fetchnewBreakingnews()
+
         // Indicate success or failure
         return Result.success()
     }
 
-    private suspend fun fetchnewBreakingnews(): Flow<PagingData<Article>> {
+    suspend fun fetchnewBreakingnews(): Flow<PagingData<Article>> {
         val pagingConfig = PagingConfig(Contance.PAGE_SIZE)
 
         return Pager(

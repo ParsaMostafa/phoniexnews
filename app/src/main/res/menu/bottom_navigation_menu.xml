@@ -16,7 +16,7 @@
     <item
         android:id="@+id/fragmentlogout"
         android:title="settings"
-        android:icon="@drawable/baseline_logout_24">
+        android:icon="@drawable/baseline_logout_24"/>
     <item
         android:id="@+id/workmanagerResult"
         android:title="Topheadlines"
