@@ -18,7 +18,7 @@ import com.example.phoenixnews.fragments.viewmodel.NewsViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
-class SavedNewsFragment: Fragment(R.layout.fragment_saved_news) {
+class SavedNewsFragment: Fragment() {
     private lateinit var binding: FragmentSavedNewsBinding
     val viewModel: NewsViewModel by navGraphViewModels(R.id.graph)
     private lateinit var adapter2: Adapter2
@@ -69,6 +69,8 @@ class SavedNewsFragment: Fragment(R.layout.fragment_saved_news) {
                 adapter2.differ.submitList(articles)
             }
         }
+
+
     }
 
     private fun setupRecyclerView() {

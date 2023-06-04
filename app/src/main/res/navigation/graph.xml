@@ -63,5 +63,9 @@
         android:name="com.example.phoenixnews.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/workmanagerResult"
+        android:name="com.example.phoenixnews.fragments.workmanagerResult"
+        android:label="workmanagerResult" />
 
 </navigation>
