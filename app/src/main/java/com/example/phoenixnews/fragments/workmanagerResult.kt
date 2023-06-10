@@ -33,9 +33,9 @@ class workmanagerResult : Fragment() {
         setupRecyclerView()
 
         // Initialize newsWorker
-        val context = requireContext()
-        val workerParams = WorkerParameters.Builder(context).build()
-        newsWorker = NewsWorker(context, workerParams)
+      //  val context = requireContext()
+        //val workerParams = WorkerParameters.Builder(context).build()
+      //  newsWorker = NewsWorker(context, workerParams)
 
         observenews()
     }

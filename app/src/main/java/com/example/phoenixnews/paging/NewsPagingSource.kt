@@ -1,5 +1,5 @@
 package com.example.phoenixnews.paging
-
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bumptech.glide.load.HttpException
@@ -18,6 +18,7 @@ class NewsPagingSource(
 
         return try {
             val response = newsApi.getBreakingNews(countryCode, position)
+            Log.d("1408", "Article: $response")
             val articles = response.body()?.articles ?: emptyList()
 
             LoadResult.Page(
