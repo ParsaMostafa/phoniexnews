@@ -16,6 +16,7 @@ import com.example.phoenixnews.App
 import com.example.phoenixnews.R
 import com.example.phoenixnews.adaptor.MultiViewAdaptor
 import com.example.phoenixnews.adaptor.NewsAdaptor
+import com.example.phoenixnews.adaptor.PagingAdaptor
 import com.example.phoenixnews.databinding.FragmentBreakingNewsBinding
 import com.example.phoenixnews.fragments.viewmodel.NewsViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -25,7 +26,7 @@ class BreakingNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentBreakingNewsBinding
     private val viewModel: NewsViewModel by navGraphViewModels(R.id.graph)
-    private var newsAdapter = MultiViewAdaptor()
+    private var newsAdapter = PagingAdaptor()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,8 +62,8 @@ class BreakingNewsFragment : Fragment() {
         val networkInfo = connectivityManager.activeNetworkInfo
         if (networkInfo != null && networkInfo.isConnected) {
             lifecycleScope.launch {
-                viewModel.listflow.collect { articles ->
-                    newsAdapter.submitList(articles)
+                viewModel.getBreakingNewsFlow("us").collect {
+                    newsAdapter.submitData(it)
                 }
             }
         } else {

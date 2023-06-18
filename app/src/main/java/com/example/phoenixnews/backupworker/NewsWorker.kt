@@ -13,6 +13,7 @@ import androidx.work.WorkerParameters
 import com.example.phoenixnews.R
 import com.example.phoenixnews.api.RetrofitInstance
 import com.example.phoenixnews.model.Article
+import com.example.phoenixnews.model.ArticleItemTypes
 import com.example.phoenixnews.paging.NewsPagingSource
 import com.example.phoenixnews.utility.Contance
 import kotlinx.coroutines.flow.Flow
@@ -38,7 +39,7 @@ class NewsWorker(context: Context, workerParameters: WorkerParameters) : Corouti
         return Result.success()
     }
 
-    suspend fun fetchnewBreakingnews(): Flow<PagingData<Article>> {
+   suspend fun fetchnewBreakingnews(): Flow<PagingData<ArticleItemTypes>> {
         val pagingConfig = PagingConfig(Contance.PAGE_SIZE)
 
         return Pager(

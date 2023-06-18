@@ -23,17 +23,21 @@ class NewsViewModel : ViewModel() {
     private val newsApi = RetrofitInstance.api
     private val repository = Repository()
     var article: Article? = null
+
+
     // api call and create a list of articles pass it to fragment for adaptor usage
+
+    /*
     val listflow  = MutableStateFlow<List<ArticleItemTypes>>(emptyList())
 
 
     fun getBreakingNewsFlow(countryCode: String) {
         viewModelScope.launch {
             val response = newsApi.getBreakingNews(countryCode, 1, API_KEY)
-            Log.d("1408", "API Response: $response")
+
             if (response.isSuccessful) {
                 val articles = response.body()?.articles
-                Log.d("1408", "Articles size: ${articles?.size}")
+
                 val list = mutableListOf<ArticleItemTypes>()
                 articles?.forEach {
                     list.add(ArticleItemTypes.HeaderModel(it.author))
@@ -54,9 +58,11 @@ class NewsViewModel : ViewModel() {
             }
         }
     }
+    */
 
 
-     /*   fun getBreakingNewsFlow(countryCode: String): Flow<PagingData<Article>> {
+
+        fun getBreakingNewsFlow(countryCode: String): Flow<PagingData<ArticleItemTypes>> {
             val pagingConfig = PagingConfig(PAGE_SIZE)
 
             return Pager(
@@ -64,7 +70,7 @@ class NewsViewModel : ViewModel() {
                 pagingSourceFactory = { NewsPagingSource(newsApi, countryCode) }
             ).flow
         }
-*/
+
     fun searchForNews(searchQuery: String): Flow<PagingData<Article>> {
         val pagingConfig = PagingConfig(PAGE_SIZE)
         return Pager(
