@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bumptech.glide.load.HttpException
 import com.example.phoenixnews.api.NewsApi
+import com.example.phoenixnews.api.RetrofitInstance
 import com.example.phoenixnews.model.Article
 import java.io.IOException
 
@@ -12,12 +13,14 @@ class NewsPagingSource(
     private val countryCode: String
 ) : PagingSource<Int, Article>() {
 
+    private val api = RetrofitInstance.api
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
 
         val position = params.key ?: 1
 
         return try {
-            val response = newsApi.getBreakingNews(countryCode, position)
+            val response = newsApi.getBreakingNews(countryCode , position)
             val articles = response.body()?.articles ?: emptyList()
 
             LoadResult.Page(

@@ -13,18 +13,18 @@ class SearchNewsPagingSource(private val api: NewsApi, private val searchQuery: 
 
             val response = api.searchForNews(searchQuery, pageNumber)
 
-            if (response.isSuccessful) {
+            return if (response.isSuccessful) {
                 val articles = response.body()?.articles ?: emptyList()
                 val prevKey = if (pageNumber == 1) null else pageNumber - 1
                 val nextKey = if (articles.isEmpty()) null else pageNumber + 1
 
-                return LoadResult.Page(
+                LoadResult.Page(
                     data = articles,
                     prevKey = prevKey,
                     nextKey = nextKey
                 )
             } else {
-                return LoadResult.Error(Exception("Failed to fetch data from the NewsApi"))
+                LoadResult.Error(Exception("Failed to fetch data from the NewsApi"))
             }
         } catch (e: Exception) {
             return LoadResult.Error(e)

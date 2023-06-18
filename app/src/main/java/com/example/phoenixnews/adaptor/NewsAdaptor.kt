@@ -12,20 +12,24 @@ import com.example.phoenixnews.model.Article
 
 class NewsAdaptor: PagingDataAdapter<Article, NewsAdaptor.ArticleViewHolder>(ARTICLE_COMPARATOR) {
 
+    lateinit var onArticleClickListener : (article: Article) -> Unit
+
     inner class ArticleViewHolder(private val binding: ItemPreViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: Article?) {
-            article?.let { item ->
+
+
+            article?.let {
                 binding.apply {
-                    Glide.with(root.context).load(item.urlToImage).into(ivArticleImage)
-                    tvSource.text = item.source?.name
-                    tvTitle.text = item.title
-                    tvDescription.text = item.description
-                    tvPublishedAt.text = item.publishedAt
+                    Glide.with(root.context).load(it.urlToImage).into(ivArticleImage)
+                    tvSource.text = it.source?.name
+                    tvTitle.text = it.title
+                    tvDescription.text = it.description
+                    tvPublishedAt.text = it.publishedAt
 
                     root.setOnClickListener {
-                        onItemClicklistener?.invoke(item)
+                        onArticleClickListener(article)
                     }
                 }
             }
@@ -53,11 +57,5 @@ class NewsAdaptor: PagingDataAdapter<Article, NewsAdaptor.ArticleViewHolder>(ART
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = getItem(position)
         holder.bind(article)
-    }
-
-    private var onItemClicklistener: ((Article?) -> Unit)? = null
-
-    fun setOnItemClickListener(listener: (Article?) -> Unit) {
-        onItemClicklistener = listener
     }
 }

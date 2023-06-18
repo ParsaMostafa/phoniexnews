@@ -52,11 +52,12 @@ class SearchNewsFragment : Fragment() {
             adapter = newsAdapter
         }
 
-        newsAdapter.setOnItemClickListener { article ->
-            article?.let {
-                viewModel.article = article
+        newsAdapter.onArticleClickListener = {
+            it.let {
+                viewModel.article = it
                 val action = SearchNewsFragmentDirections.actionSearchNewsFragmentToArticleFragment(it.url)
                 findNavController().navigate(action)
+
             }
         }
 
